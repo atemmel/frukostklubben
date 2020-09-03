@@ -7,7 +7,7 @@ import(
 )
 
 const(
-	host = "localhost"
+	host = ""
 )
 
 // https://en.wikipedia.org/wiki/Hole_punching_(networking)
