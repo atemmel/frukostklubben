@@ -35,7 +35,7 @@ func main() {
 	entry := p2p.NewPunchInMessage(username)
 
 	fmt.Println("Trying to punch...")
-	msg, err := p2p.SendMessageToBroker(entry, p2p.BrokerConnectionType, "127.0.0.1", p2p.BrokerPort)
+	msg, err := p2p.SendMessageToBroker(entry, p2p.BrokerConnectionType,configPath, p2p.BrokerPort)
 	if err != nil {
 		panic(err)
 	}
@@ -53,7 +53,7 @@ func main() {
 	loop(input)
 
 	exit := p2p.NewPunchOutMessage(username)
-	msg, err = p2p.SendMessageToBroker(exit, p2p.BrokerConnectionType, "localhost", p2p.BrokerPort)
+	msg, err = p2p.SendMessageToBroker(exit, p2p.BrokerConnectionType, configPath, p2p.BrokerPort)
 	if err != nil {
 		panic(err)
 	}
