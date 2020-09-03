@@ -7,6 +7,7 @@ const(
 	BrokerConnectionType = "tcp"
 )
 
-type Message struct {
-	contents string
+type PeerMessage struct {
+	Type int
+	Content string
 }

@@ -34,8 +34,8 @@ type FromBrokerMessage struct {
 }
 
 type Broker struct {
-	// username to ip
 	ledgerMutex sync.Mutex
+	// username to ip
 	ledger map[string]string
 }
 
