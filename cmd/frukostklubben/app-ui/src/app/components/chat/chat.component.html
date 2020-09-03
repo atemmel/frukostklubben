@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <cdk-virtual-scroll-viewport class="scrollview" itemSize="messages.length">
+    <div class="conversation">
+      <app-chat-message
+        *cdkVirtualFor="let message of messages"
+        [message]="message"
+        class="message"
+      >
+      </app-chat-message>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+  <textarea
+    class="messageInput"
+    rows="1"
+    placeholder="Write message here..."
+  ></textarea>
+</div>

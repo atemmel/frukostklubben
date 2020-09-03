@@ -1,0 +1,50 @@
+.wrapper {
+  height: 100%;
+  max-width: 300px;
+  min-width: 200px;
+  background-color: #222222;
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.users {
+  color: white;
+  margin: 0;
+
+  padding-top: 10px;
+
+  font-size: 18px;
+}
+
+.title {
+  color: white;
+
+  font-weight: normal;
+
+  text-align: center;
+
+  font-size: 16px;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.username {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.circle {
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+
+  background-color: yellow;
+}

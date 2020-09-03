@@ -1,0 +1,46 @@
+.message {
+  color: white;
+
+  margin-top: 10px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.circle {
+  height: 40px;
+  width: 40px;
+
+  border-radius: 20px;
+
+  background-color: yellow;
+}
+
+.right-col {
+  margin-left: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.author {
+  margin: 0;
+  padding: 0;
+
+  font-weight: bold;
+
+  font-size: 18px;
+}
+
+.message {
+  margin: 0;
+  padding: 0;
+
+  margin-top: 5px;
+
+  font-weight: normal;
+
+  font-size: 16px;
+}
