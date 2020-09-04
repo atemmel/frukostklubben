@@ -1,25 +1,11 @@
 <div class="wrapper">
   <div class="title">Users Online</div>
   <div class="users">
-    <div class="user">
-      <div class="circle"></div>
-      <p class="username">Ogge</p>
-    </div>
-    <div class="user">
-      <div class="circle"></div>
-      <p class="username">Fredde</p>
-    </div>
-    <div class="user">
-      <div class="circle"></div>
-      <p class="username">Fredde</p>
-    </div>
-    <div class="user">
-      <div class="circle"></div>
-      <p class="username">Fredde</p>
-    </div>
-    <div class="user">
-      <div class="circle"></div>
-      <p class="username">Fredde</p>
+    <div class="user" *ngFor="let user of users">
+      <div class="circle" [ngStyle]="{ 'background-color': user.color }">
+        <mat-icon class="icon"> sentiment_satisfied_alt </mat-icon>
+      </div>
+      <p class="username">{{ user.name }}</p>
     </div>
   </div>
 </div>
