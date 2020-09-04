@@ -7,51 +7,32 @@ import { ChatMessage } from '../chat-message/chat-message.component';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-  messages: Array<ChatMessage> = [
-    { message: 'yo, fk?', author: 'Ogge' },
-    { message: 'aa', author: 'Fredde' },
-    { message: 'var?', author: 'Temmel' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-    { message: 'kör spinnern', author: 'Ogge' },
-  ];
+  
+  messages: Array<ChatMessage> = [];
 
-  constructor() {}
+  constructor() {
+    //this.sleep(1).then(() => {
+     
+  //});
+  }
 
-  ngOnInit(): void {}
+  
+
+  ngOnInit(): void {
+    for(var i = 0; i < 30; i++){
+      setTimeout(() => {
+        console.log("!!!!!!");
+        this.addMessage({message:'var?', author: 'Temmel'});
+      }, 1000*i) 
+  }
+  }
+
+  addMessage(message: ChatMessage) {
+    this.messages.push(message);
+  }
+  
+  sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
 }
+

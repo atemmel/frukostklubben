@@ -2,7 +2,7 @@
   <cdk-virtual-scroll-viewport class="scrollview" itemSize="messages.length">
     <div class="conversation">
       <app-chat-message
-        *cdkVirtualFor="let message of messages"
+        *ngFor="let message of messages"
         [message]="message"
         class="message"
       >
