@@ -39,4 +39,6 @@ npm install
 npm build --prod
 ```
 
-Copy the files in `cmd/frukostklubben/app-ui/dist/` to `cmd/frukostklubben/resources/app/`
+Copy the files in `cmd/frukostklubben/app-ui/dist/` to `cmd/frukostklubben/resources/app/`.
+
+Run the bundler with `astilectron-bundler` (or `~/go/bin/astilectron-bundler` if your `$GOPATH` is not set up correctly)
