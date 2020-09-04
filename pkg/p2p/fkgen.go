@@ -15,6 +15,11 @@ var FrukostOptions []Frukost = []Frukost{
 	{ "Curres" },
 	{ "Ecosub" },
 	{ "Great Eastern" },
+	{ "Biteline City" },
+	{ "Biteline West" },
+	{ "Donken" },
+	{ "Donkadonken" },
+	{ "Max" },
 }
 
 var BowserOptions []Frukost = []Frukost{
