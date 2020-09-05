@@ -13,8 +13,14 @@
   align-items: stretch;
 }
 
+$input-color: #555555;
+
+.messageForm {
+  display: flex;
+}
+
 .messageInput {
-  background-color: gray;
+  background-color: $input-color;
   color: white;
 
   padding: 0;
@@ -24,7 +30,9 @@
 
   border: none;
 
-  font-size: 20px;
+  font-size: 16px;
+
+  flex-grow: 1;
 
   // width: 100%;
 
@@ -32,16 +40,20 @@
 
   resize: none;
 
-  border: 1px solid gray;
+  border: 1px solid $input-color;
+
+  font-family: formula;
 }
 
 .messageInput::placeholder {
-  color: #aaaaaa;
+  color: gray;
+  font-family: formula;
+  font-size: 16px;
 }
 
 .messageInput:focus {
   outline: none !important;
-  border: 1px solid lightgray;
+  // border: 1px solid gray;
 }
 
 .conversation {
