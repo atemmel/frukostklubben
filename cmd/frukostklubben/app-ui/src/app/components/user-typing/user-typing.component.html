@@ -1,0 +1,28 @@
+<div class="userTyping" *ngIf="usersTyping.length > 0">
+  <ng-container *ngIf="usersTyping.length == 1"
+    >{{ usersTyping[0].name }} is typing</ng-container
+  >
+  <ng-container *ngIf="usersTyping.length == 2"
+    >{{ usersTyping[0].name }} and {{ usersTyping[1].name }} is
+    typing</ng-container
+  >
+  <ng-container *ngIf="usersTyping.length > 2"
+    >Multiple people are typing</ng-container
+  >
+
+  <div
+    class="dot"
+    [@jumpAnimation]="dotStates[0]"
+    (@jumpAnimation.done)="animationDone(0)"
+  ></div>
+  <div
+    class="dot"
+    [@jumpAnimation]="dotStates[1]"
+    (@jumpAnimation.done)="animationDone(1)"
+  ></div>
+  <div
+    class="dot"
+    [@jumpAnimation]="dotStates[2]"
+    (@jumpAnimation.done)="animationDone(2)"
+  ></div>
+</div>

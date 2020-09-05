@@ -10,9 +10,21 @@
     </div>
   </cdk-virtual-scroll-viewport>
 
-  <textarea
-    class="messageInput"
-    rows="1"
-    placeholder="Write message here..."
-  ></textarea>
+  <app-user-typing [usersTyping]="usersTyping"></app-user-typing>
+
+  <form
+    class="messageForm"
+    #sendForm="ngForm"
+    (keydown)="enterSubmit($event, sendForm.form)"
+    (ngSubmit)="sendMessage(sendForm.form)"
+  >
+    <textarea
+      class="messageInput"
+      [rows]="inputRows"
+      placeholder="Write message here..."
+      name="messageInput"
+      [(ngModel)]="typedMessage"
+      (ngModelChange)="onTyping()"
+    ></textarea>
+  </form>
 </div>

@@ -1,0 +1,21 @@
+.userTyping {
+  margin-left: 30px;
+  margin-bottom: 10px;
+  color: lightgray;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.dot {
+  margin-bottom: 4px;
+  margin-left: 2px;
+  background-color: lightgray;
+  height: 5px;
+  width: 5px;
+  border-radius: 2.5px;
+}
+
+.dot:first-of-type {
+  margin-left: 5px;
+}
