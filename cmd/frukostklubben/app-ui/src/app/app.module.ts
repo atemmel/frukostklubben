@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { UserSectionComponent } from './components/user-section/user-section.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, ChatMessageComponent, ChatComponent, UserSectionComponent],
@@ -17,6 +18,7 @@ import { UserSectionComponent } from './components/user-section/user-section.com
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
