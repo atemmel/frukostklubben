@@ -10,7 +10,11 @@ import { MaterialModule } from './material.module';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { UserSectionComponent } from './components/user-section/user-section.component';
+<<<<<<< HEAD
 import { UserTypingComponent } from './components/user-typing/user-typing.component';
+=======
+import { HttpClientModule } from '@angular/common/http';
+>>>>>>> 7a3e02572f4a8fca8d33101f300d1b4fb7575814
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { UserTypingComponent } from './components/user-typing/user-typing.compon
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+<<<<<<< HEAD
     FormsModule,
+=======
+    HttpClientModule
+>>>>>>> 7a3e02572f4a8fca8d33101f300d1b4fb7575814
   ],
   providers: [],
   bootstrap: [AppComponent],
