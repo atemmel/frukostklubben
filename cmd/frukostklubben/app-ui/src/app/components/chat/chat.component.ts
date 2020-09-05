@@ -9,11 +9,11 @@ import { ChatMessage } from '../chat-message/chat-message.component';
 export class ChatComponent implements OnInit {
   
   messages: Array<ChatMessage> = [];
+  d: string = new Date().toLocaleString();
+  
+  
 
   constructor() {
-    //this.sleep(1).then(() => {
-     
-  //});
   }
 
   
@@ -21,8 +21,9 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     for(var i = 0; i < 30; i++){
       setTimeout(() => {
-        console.log("!!!!!!");
-        this.addMessage({message:'var?', author: 'Temmel'});
+        this.d = new Date().toLocaleString();
+        console.log (this.d);
+        this.addMessage({message:'var?', author: 'Temmel',timestamp: this.d });
       }, 1000*i) 
   }
   }

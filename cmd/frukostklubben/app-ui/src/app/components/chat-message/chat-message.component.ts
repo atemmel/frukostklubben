@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {trigger, transition, animate, style} from '@angular/animations';
 export interface ChatMessage {
   author?: string;
-  timestamp?: string;
+  timestamp: string;
   message: string;
 }
 

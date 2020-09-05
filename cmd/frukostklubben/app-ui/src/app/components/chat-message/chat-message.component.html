@@ -2,7 +2,10 @@
   <div class="message" [@entryAnimation]>
     <div class="circle"></div>
     <div class="right-col">
-      <p class="author">{{ message.author }}</p>
+      <div class="messageTimestamp-row">
+        <p class="author">{{ message.author }}</p>
+        <p class="timestamp">{{ message.timestamp }}</p>
+      </div>
       <p class="message">{{ message.message }}</p>
     </div>
   </div>
