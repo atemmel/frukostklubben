@@ -1,8 +1,9 @@
 <div class="wrapper">
   <div class="title">Users Online</div>
   <div class="users">
-    <div class="user" *ngFor="let user of users;" [@entryAnimation]>
+    <div class="user" *ngFor="let user of users;" [@entryAnimation] [@leaveAnimation] (click)="removeUser(user)">
       <div class="circle" [ngStyle]="{ 'background-color': user.color } "[@rotateAnimation]
+      (@rotateAnimation.start)="kollaSkiten(user)"
       (@rotateAnimation.done)="user.showHelmet=true">
         <mat-icon *ngIf="!user.showHelmet" class="icon" svgIcon="wheel"></mat-icon>
         <mat-icon *ngIf="user.showHelmet" class="icon helmet">sports_motorsports</mat-icon>

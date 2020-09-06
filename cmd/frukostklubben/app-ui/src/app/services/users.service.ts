@@ -13,4 +13,18 @@ export class UsersService {
   getUsers(): Array<User> {
     return this.usersInChat;
   }
+  removeUsers(name: string){
+    if(this.usersInChat.length !== 0)
+    {
+      let toRemoveIndex: number;
+      for(var i = 0; i < this.usersInChat.length; i++)
+      {
+        if(this.usersInChat[i].name === name)
+        {
+          toRemoveIndex = i;
+        }
+      }
+      this.usersInChat.splice(toRemoveIndex, 1);
+    }
+  }
 }
