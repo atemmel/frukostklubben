@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { FkPopupDialog } from '../fk-popup/fk-popup.component';
 
@@ -15,11 +15,23 @@ export class FkButtonComponent implements OnInit {
   ngOnInit(): void {}
 
   openFkPopup() {
-    const dialogRef = this.dialog.open(FkPopupDialog);
+    const dialogConfig = new MatDialogConfig();
+
+    //dialogConfig.disableClose = true;
+    //dialogConfig.autoFocus = true;
+
+    //dialogConfig.hasBackdrop = false;
+
+    dialogConfig.panelClass = 'popup-background';
+
+    const dialogRef = this.dialog.open(FkPopupDialog, {
+      panelClass: 'fk-popup',
+      backdropClass: 'fk-backdrop',
+      width: '100vh',
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      //this.animal = result;
     });
   }
 }

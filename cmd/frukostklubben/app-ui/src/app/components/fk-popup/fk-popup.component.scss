@@ -1,0 +1,62 @@
+.playoff-wrapper {
+  display: flex;
+
+  justify-content: center;
+
+  min-width: 20rem;
+
+  .list {
+    border: 3px solid transparent;
+    border-radius: 15px;
+
+    // flex-grow: 1;
+  }
+
+  .left {
+    margin-right: 20px;
+  }
+
+  .selected {
+    border: 3px dashed green;
+    // background-color: lightgray;
+
+    .restaurant {
+      font-size: 25px;
+      color: yellowgreen;
+    }
+  }
+
+  color: lightgray;
+}
+
+.start-button {
+  margin-top: 20px;
+
+  background-color: white;
+}
+
+.restaurant {
+  font-family: formula;
+
+  font-size: 24px;
+
+  color: white;
+
+  font-weight: bold;
+}
+
+.winner-wrapper {
+}
+
+.winner-restaurant {
+  text-align: center;
+
+  margin: 50px;
+
+  color: yellowgreen;
+}
+
+.popup-background {
+  color: black;
+  background-color: transparent;
+}

@@ -20,3 +20,12 @@ body {
   margin: 0;
   font-family: formula, Roboto, "Helvetica Neue", sans-serif;
 }
+
+.mat-dialog-container {
+  background: transparent !important;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+}
+
+.fk-backdrop {
+  backdrop-filter: blur(2px);
+}

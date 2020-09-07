@@ -1,1 +1,43 @@
-<h1 mat-dialog-title>FK Spinner</h1>
+<!-- <h1 mat-dialog-title>FK Spinner</h1> -->
+
+<div *ngIf="restaurants.length > 1" class="playoff-wrapper">
+  <div class="list left {{ selectedGroup == 'left' ? 'selected' : '' }}">
+    <mat-list>
+      <mat-list-item
+        *ngFor="let restaurant of leftRestaurants"
+        [@leaveLeft]
+        (@leaveLeft.done)="leaveDone()"
+        [@enterLeft]
+        (@enterLeft.done)="enterDone()"
+      >
+        <p class="restaurant">{{ restaurant }}</p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="list right {{ selectedGroup == 'right' ? 'selected' : '' }}">
+    <mat-list>
+      <mat-list-item
+        *ngFor="let restaurant of rightRestaurants"
+        [@leaveRight]
+        (@leaveRight.done)="leaveDone()"
+        [@enterRight]
+        (@enterRight.done)="enterDone()"
+      >
+        <p class="restaurant">{{ restaurant }}</p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
+
+<div *ngIf="restaurants.length == 1" [@winnerEnter] class="winner-wrapper">
+  <h1 class="winner-restaurant">{{ restaurants[0] }}</h1>
+</div>
+
+<button
+  *ngIf="!playoffStarted"
+  mat-button
+  class="start-button"
+  (click)="startPlayoff()"
+>
+  Start
+</button>
