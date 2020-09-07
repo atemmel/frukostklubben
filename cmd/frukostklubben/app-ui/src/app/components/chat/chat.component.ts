@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChatMessage } from '../chat-message/chat-message.component';
 import { User } from '../user-section/user-section.component';
 
+import { UsersService } from '../../services/users.service';
+
 import {
   trigger,
   transition,
@@ -9,7 +11,6 @@ import {
   style,
   state,
 } from '@angular/animations';
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -17,24 +18,22 @@ import {
 })
 export class ChatComponent implements OnInit {
   messages: Array<ChatMessage> = [];
-  d: string = new Date().toLocaleString();
-
   usersTyping: Array<User> = [{ name: 'Oscar' }, { name: 'Fredde' }];
 
   typedMessage: string;
   inputRows: number = 1;
 
-  constructor() {}
+  constructor(private userService: UsersService) {}
 
   ngOnInit(): void {
     for (var i = 0; i < 30; i++) {
       setTimeout(() => {
-        this.d = new Date().toLocaleString();
-        console.log(this.d);
+        var timeStampForMessage = new Date().toLocaleString();
+        var random =  Math.floor(Math.random() *( this.userService.getUsers().length));
         this.addMessage({
-          message: 'var?',
-          author: 'Temmel',
-          timestamp: this.d,
+          message: 'Hej',
+          author: this.userService.getUsers()[random],
+          timestamp: timeStampForMessage,
         });
       }, 1000 * i);
     }

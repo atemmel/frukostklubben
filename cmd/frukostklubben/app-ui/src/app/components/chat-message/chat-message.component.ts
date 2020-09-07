@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { trigger, transition, animate, style } from '@angular/animations';
+import { User } from '../user-section/user-section.component';
 export interface ChatMessage {
-  author?: string;
+  author: User;
   timestamp: string;
   message: string;
 }
