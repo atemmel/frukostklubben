@@ -2,12 +2,13 @@
 
 ### dependencies
 
-* angular
-* astilectron bundler 
-* go
-* nodejs
+- angular
+- astilectron bundler
+- go
+- nodejs
 
 To install the astilectron bundler, you can run the following commands:
+
 ```sh
 # Download
 go get -u github.com/asticode/go-astilectron-bundler/...
@@ -36,7 +37,7 @@ go build ./cmd/frukostklubben-tui
 ```sh
 cd cmd/frukostklubben/app-ui
 npm install
-npm build --prod
+ng build --prod
 ```
 
 Copy the files in `cmd/frukostklubben/app-ui/dist/` to `cmd/frukostklubben/resources/app/`.

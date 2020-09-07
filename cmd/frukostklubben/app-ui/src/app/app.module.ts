@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './shared/material.module';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { UserSectionComponent } from './components/user-section/user-section.component';
