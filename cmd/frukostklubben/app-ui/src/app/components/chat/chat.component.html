@@ -12,19 +12,24 @@
 
   <app-user-typing [usersTyping]="usersTyping"></app-user-typing>
 
-  <form
-    class="messageForm"
-    #sendForm="ngForm"
-    (keydown)="enterSubmit($event, sendForm.form)"
-    (ngSubmit)="sendMessage(sendForm.form)"
-  >
-    <textarea
-      class="messageInput"
-      [rows]="inputRows"
-      placeholder="Write message here..."
-      name="messageInput"
-      [(ngModel)]="typedMessage"
-      (ngModelChange)="onTyping()"
-    ></textarea>
-  </form>
+  <div class="input-wrapper">
+    <form
+      class="messageForm"
+      #sendForm="ngForm"
+      (keydown)="enterSubmit($event, sendForm.form)"
+      (ngSubmit)="sendMessage(sendForm.form)"
+    >
+      <textarea
+        class="messageInput"
+        [rows]="inputRows"
+        placeholder="Write message here..."
+        name="messageInput"
+        [(ngModel)]="typedMessage"
+        (ngModelChange)="onTyping()"
+      ></textarea>
+    </form>
+    <div class="super-buttons">
+      <app-fk-button></app-fk-button>
+    </div>
+  </div>
 </div>

@@ -6,6 +6,10 @@ import { MatInputModule } from '@angular/material/input';
 
 import { MatIconModule } from '@angular/material/icon';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -14,6 +18,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatInputModule,
     MatIconModule,
     ScrollingModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatDialogModule,
   ],
   exports: [
     MatCardModule,
@@ -21,6 +28,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatInputModule,
     MatIconModule,
     ScrollingModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}

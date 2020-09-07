@@ -12,6 +12,8 @@ import { ChatComponent } from './components/chat/chat.component';
 import { UserSectionComponent } from './components/user-section/user-section.component';
 import { UserTypingComponent } from './components/user-typing/user-typing.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FkButtonComponent } from './components/fk-button/fk-button.component';
+import { FkPopupDialog } from './components/fk-popup/fk-popup.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     ChatComponent,
     UserSectionComponent,
     UserTypingComponent,
+    FkButtonComponent,
+    FkPopupDialog,
   ],
   imports: [
     BrowserModule,
@@ -31,5 +35,6 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [FkPopupDialog],
 })
 export class AppModule {}
