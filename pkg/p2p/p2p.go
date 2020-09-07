@@ -1,19 +1,24 @@
 package p2p
 
 import (
+	"encoding/json"
 	"net"
 	"sync"
 	"time"
 )
+
+type MessageType int
 
 const(
 	PeerPort = "7331"
 	PeerConnectionType = "tcp"
 	BrokerPort = "7332"
 	BrokerConnectionType = "tcp"
+
+	TextMessage = 0
+	FKMessage = 1
 )
 
-type MessageType int
 
 type PeerMessage struct {
 	Content string
@@ -23,6 +28,12 @@ type PeerMessage struct {
 type Peers struct {
 	connsMutex sync.Mutex
 	conns map[string]net.Conn
+}
+
+func NewPeers() Peers {
+	var peers Peers
+	peers.conns = make(map[string]net.Conn)
+	return peers
 }
 
 func (peers *Peers) AddConnection(username string, connectionType string, addr string, port string) {
@@ -38,6 +49,22 @@ func (peers *Peers) AddConnection(username string, connectionType string, addr s
 		peers.connsMutex.Unlock()
 		break
 	}
+}
+
+func (peers *Peers) DistributeMessage(msg PeerMessage) error {
+	data, err := json.Marshal(msg)
+	if err != nil {
+		return err
+	}
+
+	data = appendNewline(data)
+	peers.connsMutex.Lock()
+	defer peers.connsMutex.Unlock()
+	for _, conn := range peers.conns {
+		_, err = conn.Write(data)
+		// TODO: Handle error in a responsible manner
+	}
+	return nil
 }
 
 /*

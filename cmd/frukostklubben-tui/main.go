@@ -50,7 +50,25 @@ func main() {
 		fmt.Println("User", k, "is connected from", e)
 	}
 
-	loop(input)
+	peers := p2p.NewPeers()
+	for user, ip := range msg.Peers {
+		peers.AddConnection(user, p2p.PeerConnectionType, ip, p2p.PeerPort)
+	}
+
+	running := true
+	for running {
+		input.Scan()
+		switch input.Text() {
+			case "exit":
+				running = false
+			case "/fk":
+				fk := p2p.RandFrukost()
+				fmt.Println("Todays frukost:", fk.Name)
+			default:
+				pmsg := constructMessage(input.Text())
+				peers.DistributeMessage(pmsg)
+		}
+	}
 
 	exit := p2p.NewPunchOutMessage(username)
 	msg, err = p2p.SendMessageToBroker(exit, p2p.BrokerConnectionType, conf.BrokerAddress, p2p.BrokerPort)
@@ -59,16 +77,9 @@ func main() {
 	}
 }
 
-func loop(input *bufio.Scanner) {
-	for {
-		input.Scan()
-		switch input.Text() {
-			case "exit":
-				return
-			case "/fk":
-				fk := p2p.RandFrukost()
-				fmt.Println("Todays frukost:", fk.Name)
-			default:
-		}
+func constructMessage(str string) p2p.PeerMessage {
+	return p2p.PeerMessage{
+		Content: str,
+		Type: p2p.TextMessage,
 	}
 }
