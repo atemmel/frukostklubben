@@ -14,6 +14,8 @@ import { UserTypingComponent } from './components/user-typing/user-typing.compon
 import { HttpClientModule } from '@angular/common/http';
 import { FkButtonComponent } from './components/fk-button/fk-button.component';
 import { FkPopupDialog } from './components/fk-popup/fk-popup.component';
+import { SplashscreenComponent } from './pages/splashscreen/splashscreen.component';
+import { ChatViewComponent } from './pages/chat-view/chat-view.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { FkPopupDialog } from './components/fk-popup/fk-popup.component';
     UserTypingComponent,
     FkButtonComponent,
     FkPopupDialog,
+    SplashscreenComponent,
+    ChatViewComponent,
   ],
   imports: [
     BrowserModule,
