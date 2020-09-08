@@ -11,6 +11,9 @@ import {
   style,
   state,
 } from '@angular/animations';
+
+declare var astilectron: any;
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -23,13 +26,19 @@ export class ChatComponent implements OnInit {
   typedMessage: string;
   inputRows: number = 1;
 
-  constructor(private userService: UsersService) {}
+  constructor(private userService: UsersService) {
+    document.addEventListener('astilectron-ready', (e) => {
+      console.log('ready.......');
+    });
+  }
 
   ngOnInit(): void {
     for (var i = 0; i < 30; i++) {
       setTimeout(() => {
         var timeStampForMessage = new Date().toLocaleString();
-        var random =  Math.floor(Math.random() *( this.userService.getUsers().length));
+        var random = Math.floor(
+          Math.random() * this.userService.getUsers().length
+        );
         this.addMessage({
           message: 'Hej',
           author: this.userService.getUsers()[random],
@@ -49,15 +58,22 @@ export class ChatComponent implements OnInit {
     if (rows > 20) this.inputRows = 20;
     else this.inputRows = rows;
 
-    console.log('Rows: ' + this.inputRows);
+    // console.log('Rows: ' + this.inputRows);
   }
 
   sendMessage(form) {
-    console.log('message: ' + this.typedMessage + '---end');
-    this.typedMessage = '';
     this.onTyping();
 
-    console.log('--' + this.typedMessage + '----');
+    console.log('skickar...');
+
+    astilectron.sendMessage(
+      { user: 'Oscar', message: this.typedMessage },
+      () => {
+        // console.log('received ' + message);
+      }
+    );
+
+    this.typedMessage = '';
   }
 
   enterSubmit(event, form) {

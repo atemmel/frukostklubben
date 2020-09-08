@@ -1,7 +1,7 @@
-#!/usr/bin/sh
+#/usr/bin/sh
 ORIGIN=$(pwd)
 cd ./cmd/frukostklubben/app-ui
-ng build --prod --base-href "."
+ng build --prod --base-href "./"
 cd ..
 rm resources/app/*
 cp -r app-ui/dist/app-ui/* resources/app/

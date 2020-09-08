@@ -84,8 +84,8 @@ export class UserSectionComponent implements OnInit {
   kollaSkiten(user) {
     this.cdRef.detectChanges();
     user.showHelmet = false;
-    console.log(user);
-    console.log(this.usersService.usersInChat);
+    // console.log(user);
+    // console.log(this.usersService.usersInChat);
     this.users;
   }
 

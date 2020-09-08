@@ -71,4 +71,21 @@ func main() {
 	}); err != nil {
 		log.Fatal(fmt.Errorf("running bootstrap failed: %w", err))
 	}
+
+
+	// w.OnMessage(func(m *astilectron.EventMessage) interface{} {
+		
+	// 	// Unmarshal
+	// 	var s string
+		
+	// 	log.Printf("message: %s",s);
+		
+	// 	//m.Unmarshal(&s)
+	
+	// 	// // Process message
+	// 	// if s == "hello" {
+	// 	// 		return "world"
+	// 	// }
+	// 	return "hello from go!"
+	// })
 }
