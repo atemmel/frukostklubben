@@ -1,6 +1,11 @@
 <div class="wrapper">
   <div class="message" [@entryAnimation]>
-    <div class="circle" [ngStyle]="{ 'background-color': message.author.color }"> <mat-icon class="icon"> face </mat-icon></div>
+    <div
+      class="circle"
+      [ngStyle]="{ 'background-color': message.author.color }"
+    >
+      <mat-icon class="icon"> face </mat-icon>
+    </div>
     <div class="right-col">
       <div class="messageTimestamp-row">
         <p class="author">{{ message.author.name }}</p>

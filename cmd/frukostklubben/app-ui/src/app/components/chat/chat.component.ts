@@ -26,26 +26,38 @@ export class ChatComponent implements OnInit {
   typedMessage: string;
   inputRows: number = 1;
 
-  constructor(private userService: UsersService) {
-    document.addEventListener('astilectron-ready', (e) => {
-      console.log('ready.......');
-    });
-  }
+  constructor(private userService: UsersService) {}
 
   ngOnInit(): void {
-    for (var i = 0; i < 30; i++) {
-      setTimeout(() => {
-        var timeStampForMessage = new Date().toLocaleString();
-        var random = Math.floor(
-          Math.random() * this.userService.getUsers().length
-        );
-        this.addMessage({
-          message: 'Hej',
-          author: this.userService.getUsers()[random],
-          timestamp: timeStampForMessage,
-        });
-      }, 1000 * i);
-    }
+    document.addEventListener('astilectron-ready', (e) => {
+      console.log('ready.......');
+
+      astilectron.onMessage((message: ChatMessage) => {
+        // Process message
+        console.log(message);
+
+        console.log(message.message);
+        console.log(message.author.name);
+
+        this.addMessage(message);
+
+        return 'hej';
+      });
+    });
+
+    // for (var i = 0; i < 30; i++) {
+    //   setTimeout(() => {
+    //     var timeStampForMessage = new Date().toLocaleString();
+    //     var random = Math.floor(
+    //       Math.random() * this.userService.getUsers().length
+    //     );
+    //     this.addMessage({
+    //       message: 'Hej',
+    //       author: this.userService.getUsers()[random],
+    //       timestamp: timeStampForMessage,
+    //     });
+    //   }, 1000 * i);
+    // }
   }
 
   addMessage(message: ChatMessage) {
@@ -67,7 +79,11 @@ export class ChatComponent implements OnInit {
     console.log('skickar...');
 
     astilectron.sendMessage(
-      { user: 'Oscar', message: this.typedMessage },
+      {
+        author: { name: 'Oscar' },
+        message: this.typedMessage,
+        timestamp: new Date().toLocaleString(),
+      },
       () => {
         // console.log('received ' + message);
       }

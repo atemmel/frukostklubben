@@ -6,48 +6,40 @@ import (
 	"github.com/asticode/go-astilectron"
 	bootstrap "github.com/asticode/go-astilectron-bootstrap"
 
-	"fmt"
+	"log"
 )
 
-type Message struct {
-	User string
-	Message string
-  }
+// type Message struct {
+// 	User string
+// 	Message string
+//   }
 
 // handleMessages handles messages
-func handleMessages(_ *astilectron.Window, m bootstrap.MessageIn) (payload interface{}, err error) {
+func handleMessages(w *astilectron.Window, m bootstrap.MessageIn) (payload interface{}, err error) {
 	
+	// var message string
 	// fmt.Println(m)
 
-	// fmt.Println(m)
-	
-	var message string
+	log.Println("!!!")
+	log.Println(m)
 
-	json.Unmarshal(m.Payload, &message)
+	// m.Unmarshal(&message)
+	// fmt.Println(message)
 
-	fmt.Println("!!!")
-	fmt.Println(message)
+	log.Println("Name:")
+	log.Println(m.Name)
 
 	switch m.Name {
 	case "explore":
 		// Unmarshal payload
-
 		var path string
 		if len(m.Payload) > 0 {
 			// Unmarshal payload
 			if err = json.Unmarshal(m.Payload, &path); err != nil {
 				payload = err.Error()
-				return 
-			} else {
-				json.Unmarshal(m.Payload, &path)
-				fmt.Println(path)
+				return
 			}
 		}
-
-
-
-		// Handle cases here...
 	}
-	
 	return
 }
