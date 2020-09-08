@@ -90,10 +90,12 @@ export class FkPopupDialog implements OnInit {
   pendingStart: boolean = false;
 
   ngOnInit() {
+    this.shuffleArray(this.restaurants);
     this.divideRestaurants();
   }
 
   divideRestaurants() {
+    
     this.leftRestaurants = this.restaurants.slice(
       0,
       this.restaurants.length / 2
@@ -108,10 +110,6 @@ export class FkPopupDialog implements OnInit {
     this.playoffStarted = true;
 
     let rnd = 25 + Math.floor(Math.random() * 15);
-
-    // let rnd = Math.floor(Math.random() * 5) + 5;
-
-    console.log(rnd);
 
     for (let i = 1; i < rnd; i++) {
       setTimeout(() => {
@@ -152,8 +150,6 @@ export class FkPopupDialog implements OnInit {
     this.leftRestaurants = [];
     this.rightRestaurants = [];
 
-    // this.divideRestaurants();
-
     if (this.restaurants.length > 1)
       setTimeout(() => (this.pendingStart = true), 1500);
   }
@@ -170,4 +166,13 @@ export class FkPopupDialog implements OnInit {
   leaveDone() {
     this.divideRestaurants();
   }
+
+  shuffleArray(array) {
+    for (var i  = 0; i < array.length; i++) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
 }
