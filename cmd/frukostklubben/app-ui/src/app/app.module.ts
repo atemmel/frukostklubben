@@ -16,6 +16,7 @@ import { FkButtonComponent } from './components/fk-button/fk-button.component';
 import { FkPopupDialog } from './components/fk-popup/fk-popup.component';
 import { SplashscreenComponent } from './pages/splashscreen/splashscreen.component';
 import { ChatViewComponent } from './pages/chat-view/chat-view.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ChatViewComponent } from './pages/chat-view/chat-view.component';
     FkPopupDialog,
     SplashscreenComponent,
     ChatViewComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,6 +29,7 @@ export class ChatComponent implements OnInit {
   constructor(private userService: UsersService) {}
 
   ngOnInit(): void {
+    console.log('utanför eventListener');
     document.addEventListener('astilectron-ready', (e) => {
       console.log('ready.......');
 
