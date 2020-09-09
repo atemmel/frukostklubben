@@ -11,7 +11,8 @@
           placeholder="Skriv ditt Chattnamn"
           formControlName="username"
         />
-        <mat-icon matSuffix>sports_motorsports</mat-icon>
+        <mat-icon [ngStyle]="{'background': color, 'width':'25px','height':'25px','border-radius': '50%'}" matSuffix>sports_motorsports</mat-icon>
+        
         <!-- <mat-error *ngIf="username.errors?.required">
           Please enter a username
         </mat-error> -->
@@ -26,6 +27,26 @@
         Anslut<!-- {{ loginForm.valid ? "Välkommen " + username.value : "Anslut" }} -->
       </button>
       <!-- </mat-action-list> -->
+
+
+  <div class="color-picker">
+  <div class="summary-info" (click)="toggleColors()">
+    <div class="info">
+      <p class="style">{{ heading }}</p>
+      <p class="style-value"> Välj färg</p>
     </div>
-  </form>
+
+    <div class="circle" [ngStyle]="{'background': color}"></div>
+  </div>
+
+  <div *ngIf="show" class="opened">
+    <div class="colors">
+      <div (click)="changeColor(paint)" *ngFor="let paint of defaultColors" class="circle"
+           [ngStyle]="{'background': paint}"></div>
+    </div>
+  </div>
+</div>
+</div>
+</form>
 </mat-card>
+
