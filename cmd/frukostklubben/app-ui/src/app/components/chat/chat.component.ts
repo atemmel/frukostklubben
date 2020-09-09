@@ -86,7 +86,7 @@ export class ChatComponent implements OnInit {
 
     console.log('skickar...');
 
-    this.p2pService.sendMessage({
+    this.p2pService.sendChatMessage({
       author: { name: 'Oscar' },
       message: this.typedMessage,
       timestamp: new Date().toLocaleString(),

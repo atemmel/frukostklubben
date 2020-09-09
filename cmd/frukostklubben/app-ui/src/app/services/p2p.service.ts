@@ -11,8 +11,6 @@ export class P2pService {
 
   public readyCallback: () => void;
 
-  //public onMessage: (message: ChatMessage) => void;
-
   constructor() {
     document.addEventListener('astilectron-ready', () => {
       console.log('ready...');
@@ -26,7 +24,7 @@ export class P2pService {
     astilectron.onMessage(callback);
   }
 
-  public sendMessage(message: ChatMessage) {
+  public sendChatMessage(message: ChatMessage) {
     astilectron.sendMessage(message);
   }
 }

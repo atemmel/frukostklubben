@@ -84,7 +84,7 @@ func main() {
 				return "hej"
 			})
 			
-			w.OpenDevTools()
+			// w.OpenDevTools()
 			/*
 			go func() {
 			}()
