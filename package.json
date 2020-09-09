@@ -1,0 +1,26 @@
+{
+  "name": "frukostklubben",
+  "version": "1.0.0",
+  "description": "### dependencies",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "build": "cd cmd/frukostklubben/app-ui && ng build --prod --base-href=\"./\"",
+    "w-build": "cd cmd/frukostklubben/app-ui && ng build --prod --watch --base-href=\"./\"",
+    "package": "cd ./cmd/frukostklubben && astilectron-bundler || ~/go/bin/astilectron-bundler || printf \"Please install astilectron-bundler\n\"",
+    "run:macos": "./cmd/frukostklubben/output/darwin-amd64/Frukostklubben.app/Contents/MaOS/Frukostklubben",
+    "deploy": "npm run package && npm run:macos || printf \"The app failed to build, or the build script does not support your platform \""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atemmel/frukostklubben.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atemmel/frukostklubben/issues"
+  },
+  "homepage": "https://github.com/atemmel/frukostklubben#readme"
+}
