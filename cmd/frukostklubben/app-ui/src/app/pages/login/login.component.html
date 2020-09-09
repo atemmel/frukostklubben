@@ -1,11 +1,31 @@
 <mat-card class="page-login">
-<h1>Du behöver ett chattnamn</h1> 
-  <mat-action-list>
-    <mat-form-field appearance="outline">
+  <form [formGroup]="loginForm">
+    <div class="inner">
+      <h1>Du behöver ett chattnamn</h1>
+      <!-- <mat-action-list> -->
+
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Chattnamn</mat-label>
-        <input matInput placeholder="Skriv ditt Chattnamn">
+        <input
+          matInput
+          placeholder="Skriv ditt Chattnamn"
+          formControlName="username"
+        />
         <mat-icon matSuffix>sports_motorsports</mat-icon>
+        <!-- <mat-error *ngIf="username.errors?.required">
+          Please enter a username
+        </mat-error> -->
       </mat-form-field>
-      <button mat-raised-button (click)="login()">Anslut </button>
-  </mat-action-list>
+      <button
+        mat-raised-button
+        [disabled]="!loginForm.valid"
+        class="button"
+        color="accent"
+        (click)="login()"
+      >
+        Anslut<!-- {{ loginForm.valid ? "Välkommen " + username.value : "Anslut" }} -->
+      </button>
+      <!-- </mat-action-list> -->
+    </div>
+  </form>
 </mat-card>

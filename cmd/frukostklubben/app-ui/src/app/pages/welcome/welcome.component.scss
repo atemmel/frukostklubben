@@ -1,0 +1,21 @@
+.backdrop {
+  background-color: #333333;
+
+  height: 100vh;
+  width: 100vw;
+}
+
+.title {
+  color: lightgray;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.gif {
+  border-radius: 10px;
+}

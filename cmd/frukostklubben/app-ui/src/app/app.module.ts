@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from './shared/material.module';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
@@ -17,6 +17,7 @@ import { FkPopupDialog } from './components/fk-popup/fk-popup.component';
 import { SplashscreenComponent } from './pages/splashscreen/splashscreen.component';
 import { ChatViewComponent } from './pages/chat-view/chat-view.component';
 import { LoginComponent } from './pages/login/login.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { LoginComponent } from './pages/login/login.component';
     SplashscreenComponent,
     ChatViewComponent,
     LoginComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { LoginComponent } from './pages/login/login.component';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
   ],
   providers: [],
