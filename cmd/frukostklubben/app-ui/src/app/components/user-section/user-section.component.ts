@@ -76,7 +76,7 @@ export class UserSectionComponent implements OnInit {
   ) {
     this.matIconRegistry.addSvgIcon(
       'wheel',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/wheel.svg')
+      this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/wheel.svg')
     );
   }
 

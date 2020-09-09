@@ -3,6 +3,7 @@ import { ChatMessage } from '../chat-message/chat-message.component';
 import { User } from '../user-section/user-section.component';
 
 import { UsersService } from '../../services/users.service';
+import { P2pService } from '../../services/p2p.service';
 
 import {
   trigger,
@@ -11,8 +12,6 @@ import {
   style,
   state,
 } from '@angular/animations';
-
-declare var astilectron: any;
 
 @Component({
   selector: 'app-chat',
@@ -26,25 +25,17 @@ export class ChatComponent implements OnInit {
   typedMessage: string;
   inputRows: number = 1;
 
-  constructor(private userService: UsersService) {}
+  constructor(
+    private userService: UsersService,
+    private p2pService: P2pService
+  ) {}
 
   ngOnInit(): void {
-    console.log('utanför eventListener');
-    document.addEventListener('astilectron-ready', (e) => {
-      console.log('ready.......');
+    console.log('utanför listener');
 
-      astilectron.onMessage((message: ChatMessage) => {
-        // Process message
-        console.log(message);
-
-        console.log(message.message);
-        console.log(message.author.name);
-
-        this.addMessage(message);
-
-        return 'hej';
-      });
-    });
+    if (this.p2pService.ready) this.initListeners();
+    else this.p2pService.readyCallback = () => this.initListeners();
+    // });
 
     // for (var i = 0; i < 30; i++) {
     //   setTimeout(() => {
@@ -59,6 +50,22 @@ export class ChatComponent implements OnInit {
     //     });
     //   }, 1000 * i);
     // }
+  }
+
+  initListeners() {
+    console.log('ready.......');
+
+    this.p2pService.onMessage((message: ChatMessage) => {
+      // Process message
+      console.log(message);
+
+      console.log(message.message);
+      console.log(message.author.name);
+
+      this.addMessage(message);
+
+      return 'hej';
+    });
   }
 
   addMessage(message: ChatMessage) {
@@ -79,16 +86,11 @@ export class ChatComponent implements OnInit {
 
     console.log('skickar...');
 
-    astilectron.sendMessage(
-      {
-        author: { name: 'Oscar' },
-        message: this.typedMessage,
-        timestamp: new Date().toLocaleString(),
-      },
-      () => {
-        // console.log('received ' + message);
-      }
-    );
+    this.p2pService.sendMessage({
+      author: { name: 'Oscar' },
+      message: this.typedMessage,
+      timestamp: new Date().toLocaleString(),
+    });
 
     this.typedMessage = '';
   }
