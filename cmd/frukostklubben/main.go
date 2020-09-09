@@ -70,7 +70,7 @@ func main() {
 
 				m.Unmarshal(&message)
 
-				// log.Println(message.Author.Name + " says: " + message.Message)
+				//log.Println(message.Author.Name + " says: " + message.Message)
 
 				w.SendMessage(message, func(m *astilectron.EventMessage) {
 					// Unmarshal

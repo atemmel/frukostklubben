@@ -39,3 +39,18 @@ body {
   color: white;
   transform: scale(1.2);
 }
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white;
+}
+input.mat-input-element {
+  color: white;
+}
+::ng-deep .mat-focused .mat-from-field-label {
+  color: white !important;
+}
+::ng-deep .mat-focused .mat-from-field-underline {
+  background-color: white !important;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline:not(.mat-form-field-outline-thick) {
+   color:white; 
+  }
