@@ -83,14 +83,8 @@ func main() {
 
 				return "hej"
 			})
-
-
-			// jsonMessage, err := json.Marshal(message)
-
-			// if err != nil {log.Println(err)}
-
 			
-			// w.OpenDevTools()
+			w.OpenDevTools()
 			/*
 			go func() {
 			}()
@@ -110,75 +104,5 @@ func main() {
 		}},
 	}); err != nil {
 		log.Fatal(fmt.Errorf("running bootstrap failed: %w", err))
-	}
-
-
-	
+	}	
 }
-
-// func main() {
-// // Set logger
-// l := log.New(log.Writer(), log.Prefix(), log.Flags())
-
-// // Create astilectron
-// a, err := astilectron.New(l, astilectron.Options{
-// 	AppName:           "Test",
-// 	BaseDirectoryPath: "example",
-// })
-// if err != nil {
-// 	l.Fatal(fmt.Errorf("main: creating astilectron failed: %w", err))
-// }
-// defer a.Close()
-
-// // Handle signals
-// a.HandleSignals()
-
-// // Start
-// if err = a.Start(); err != nil {
-// 	l.Fatal(fmt.Errorf("main: starting astilectron failed: %w", err))
-// }
-
-// // New window
-// var w *astilectron.Window
-// if w, err = a.NewWindow("index.html", &astilectron.WindowOptions{
-// 	Center: astikit.BoolPtr(true),
-// 	Height: astikit.IntPtr(700),
-// 	Width:  astikit.IntPtr(700),
-// }); err != nil {
-// 	l.Fatal(fmt.Errorf("main: new window failed: %w", err))
-// }
-
-// // Create windows
-// if err = w.Create(); err != nil {
-// 	l.Fatal(fmt.Errorf("main: creating window failed: %w", err))
-// }
-
-// // Blocking pattern
-// a.Wait()
-
-// w.OnMessage(func(m *astilectron.EventMessage) interface{} {
-		
-// 	// 		// Unmarshal
-// 	// 		// var s string
-			
-// 			// log.Printf("message: %s",s);
-			
-// 			// var message string
-	
-// 			log.Println("!!!!!")
-	
-// 			log.Println(m)
-	
-// 			// json.Unmarshal(m, &message)
-	
-// 			// log.Println(message)
-	
-// 			//m.Unmarshal(&s)
-		
-// 			// // Process message
-// 			// if s == "hello" {
-// 			// 		return "world"
-// 			// }
-// 			return "hej"
-// 		})
-// }

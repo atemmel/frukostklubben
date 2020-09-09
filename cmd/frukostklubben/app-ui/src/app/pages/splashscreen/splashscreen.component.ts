@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { P2pService } from 'src/app/services/p2p.service';
 
 @Component({
   selector: 'app-splashscreen',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./splashscreen.component.scss'],
 })
 export class SplashscreenComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private p2pService: P2pService) {}
 
   ngOnInit(): void {
     setTimeout(() => {
