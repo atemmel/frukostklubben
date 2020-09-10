@@ -1,12 +1,13 @@
 package main
 
-import(
+import (
 	"bufio"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"github.com/atemmel/go-electron/pkg/p2p"
 	"os"
+
+	"github.com/atemmel/go-electron/pkg/p2p"
 )
 
 const configPath = "client.json"
@@ -59,14 +60,14 @@ func main() {
 	for running {
 		input.Scan()
 		switch input.Text() {
-			case "exit":
-				running = false
-			case "/fk":
-				fk := p2p.RandFrukost()
-				fmt.Println("Todays frukost:", fk.Name)
-			default:
-				pmsg := constructMessage(input.Text())
-				peers.DistributeMessage(pmsg)
+		case "exit":
+			running = false
+		case "/fk":
+			fk := p2p.RandFrukost()
+			fmt.Println("Todays frukost:", fk.Name)
+		default:
+			pmsg := constructMessage(input.Text())
+			peers.DistributeMessage(pmsg)
 		}
 	}
 
@@ -80,6 +81,6 @@ func main() {
 func constructMessage(str string) p2p.PeerMessage {
 	return p2p.PeerMessage{
 		Content: str,
-		Type: p2p.TextMessage,
+		Type:    p2p.TextMessage,
 	}
 }

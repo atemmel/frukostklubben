@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../components/user-section/user-section.component';
 import { Type } from '@angular/compiler/src/core';
-import { Message } from '../interfaces/message.interface';
+import { Message, MessageTypes } from '../interfaces/message.interface';
 
 declare var astilectron: any;
 
@@ -36,8 +36,20 @@ export class P2pService {
     return this.loggedInUser;
   }
 
+  saveUser(user: User) {
+    console.log('sparar...');
+
+    astilectron.sendMessage({
+      type: MessageTypes.LOGIN_MESSAGE,
+      payload: JSON.stringify({ user: user }),
+    });
+  }
+
   public addUser(user: User, callback: (usernameTaken: boolean) => void) {
     //handle username checking here...
+
+    if (this.ready) this.saveUser(user);
+    else this.readyCallback = () => this.saveUser(user);
 
     this.loggedInUser = user;
 
@@ -45,12 +57,11 @@ export class P2pService {
   }
 
   public sendReadyMessage() {
-
     astilectron.sendMessage({
-      type : 1, 
+      type: 1,
       payload: JSON.stringify({
-        chatReady: true
-      })
+        chatReady: true,
+      }),
     });
   }
 }

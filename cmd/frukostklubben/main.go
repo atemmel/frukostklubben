@@ -1,7 +1,9 @@
 package main
 
 import (
-	 "encoding/json"
+	"encoding/json"
+	"io/ioutil"
+	"os"
 
 	astikit "github.com/asticode/go-astikit"
 	astilectron "github.com/asticode/go-astilectron"
@@ -31,11 +33,11 @@ var (
 )
 
 type User struct {
-	Name string `json:"Name"`
+	Name string `json:"name"`
 }
 
 type Message struct {
-	Type int `json:"type"`
+	Type    int    `json:"type"`
 	Payload string `json:"payload"`
 }
 
@@ -48,6 +50,16 @@ type ChatMessage struct {
 type ReadyMessage struct {
 	ChatReady bool `json:"chatReady"`
 }
+
+type LoginMessage struct {
+	User User `json:"user"`
+}
+
+const userPath = "user.json"
+
+// type UserConfig struct {
+// 	Name string
+// }
 
 func main() {
 	// Create logger
@@ -76,10 +88,7 @@ func main() {
 		OnWait: func(_ *astilectron.Astilectron, ws []*astilectron.Window, _ *astilectron.Menu, _ *astilectron.Tray, _ *astilectron.Menu) error {
 			w = ws[0]
 
-
-
 			w.OnMessage(func(m *astilectron.EventMessage) interface{} {
-
 
 				var msg Message
 				err := m.Unmarshal(&msg)
@@ -87,28 +96,45 @@ func main() {
 					fmt.Println(err)
 					return nil
 				}
-				fmt.Println(msg);
+				fmt.Println(msg)
 
 				switch msg.Type {
-					case 0:
-						fmt.Println("ChatMessage")
-						chatmsg := ChatMessage{}
-						json.Unmarshal([]byte(msg.Payload), &chatmsg)
-						fmt.Println(chatmsg.Message)
-				
-					case 1:
-						fmt.Println("ReadyMessage")
-						readymsg := ReadyMessage{}
-						json.Unmarshal([]byte(msg.Payload), &readymsg)
-						fmt.Println(readymsg)
-						w.Resize(850,650);
-						w.Center();
+				case 0:
+					fmt.Println("ChatMessage")
+					chatmsg := ChatMessage{}
+					json.Unmarshal([]byte(msg.Payload), &chatmsg)
+					fmt.Println(chatmsg.Message)
 
-					default:
-						fmt.Println("Unrecognized message :(")
+				case 1:
+					fmt.Println("ReadyMessage")
+					readymsg := ReadyMessage{}
+					json.Unmarshal([]byte(msg.Payload), &readymsg)
+					fmt.Println(readymsg)
+					w.Resize(850, 650)
+					w.Center()
+				case 4:
+					fmt.Println("LoginMessage")
+					usermsg := LoginMessage{}
+					json.Unmarshal([]byte(msg.Payload), &usermsg)
+
+					_, err := os.Create(userPath)
+					if err != nil {
+						log.Fatal(err)
+					}
+
+					file, _ := json.MarshalIndent(usermsg, "", " ")
+					// fmt.println(file)
+					fmt.Println(usermsg)
+
+					_ = ioutil.WriteFile(userPath, file, 0644)
+
+					// _, err2 := f.WriteString("old falcon\n")
+
+				default:
+					fmt.Println("Unrecognized message :(")
 				}
 
-				w.SendMessage(msg);
+				w.SendMessage(msg)
 
 				return nil
 			})
@@ -136,4 +162,3 @@ func main() {
 		log.Fatal(fmt.Errorf("running bootstrap failed: %w", err))
 	}
 }
-
