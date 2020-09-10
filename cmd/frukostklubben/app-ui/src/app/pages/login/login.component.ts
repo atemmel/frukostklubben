@@ -12,6 +12,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { P2pService } from 'src/app/services/p2p.service';
+import { UsersService } from 'src/app/services/users.service';
+import { User } from 'src/app/interfaces/message.interface';
 
 @Component({
   selector: 'app-login',
@@ -40,16 +42,7 @@ export class LoginComponent implements OnInit {
     '#a367b5',
     '#ee3e6d',
     '#d63d62',
-    '#c6a670',
-    '#f46600',
-    '#cf0500',
-    '#efabbd',
-    '#8e0622',
-    '#f0b89a',
-    '#f0ca68',
-    '#62382f',
-    '#c97545',
-    '#c1800b'
+    '#c6a670'
   ];
 
 
@@ -61,7 +54,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private p2pService: P2pService
+    private p2pService: P2pService,
+    private usersService: UsersService
   ) {
     this.loginForm = this.formBuilder.group({
       username: new FormControl('', [Validators.required]),
@@ -90,12 +84,20 @@ export class LoginComponent implements OnInit {
     this.show = !this.show;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.defaultColors =  getRandomColor(this.defaultColors,5);
+  }
   login() {
-    this.p2pService.addUser(
-      { name: this.username.value },
+
+    var user: User = { name: this.username.value, color: this.color };
+
+    this.p2pService.addUser(user,
       (usernameTaken: boolean) => {
-        if (!usernameTaken) this.router.navigateByUrl('welcome');
+        if (!usernameTaken) {
+          this.usersService.addUser(user);
+          this.router.navigateByUrl('welcome');
+          
+        }
       }
     );
   }
@@ -103,4 +105,17 @@ export class LoginComponent implements OnInit {
   get username() {
     return this.loginForm.get('username');
   }
+}
+function getRandomColor(arr, n) {
+  var result = new Array(n),
+      len = arr.length,
+      taken = new Array(len);
+  if (n > len)
+      throw new RangeError("getRandom: more elements taken than available");
+  while (n--) {
+      var x = Math.floor(Math.random() * len);
+      result[n] = arr[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+  }
+  return result;
 }

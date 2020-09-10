@@ -1,12 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { User } from '../user-section/user-section.component';
-export interface ChatMessage {
-  author: User;
-  timestamp: string;
-  message: string;
-}
-
+import { ChatMessage } from 'src/app/interfaces/message.interface';
 @Component({
   selector: 'app-chat-message',
   templateUrl: './chat-message.component.html',

@@ -1,7 +1,7 @@
 package main
 
 import (
-	// "encoding/json"
+	 "encoding/json"
 
 	astikit "github.com/asticode/go-astikit"
 	astilectron "github.com/asticode/go-astilectron"
@@ -31,13 +31,22 @@ var (
 )
 
 type User struct {
-	Name string `json:"name"`
+	Name string `json:"Name"`
 }
 
 type Message struct {
-	Message   string `json:"message"`
+	Type int `json:"type"`
+	Payload string `json:"payload"`
+}
+
+type ChatMessage struct {
 	Author    User   `json:"author"`
+	Message   string `json:"message"`
 	Timestamp string `json:"timestamp"`
+}
+
+type ReadyMessage struct {
+	ChatReady bool `json:"chatReady"`
 }
 
 func main() {
@@ -47,8 +56,8 @@ func main() {
 	// Run bootstrap
 	log.Printf("Running app built at %s\n", BuiltAt)
 
-	var startHeight = astikit.IntPtr(600)
-	var startWidth = astikit.IntPtr(550)
+	var startHeight = astikit.IntPtr(450)
+	var startWidth = astikit.IntPtr(600)
 
 	if err := bootstrap.Run(bootstrap.Options{
 		Asset:    Asset,
@@ -67,24 +76,41 @@ func main() {
 		OnWait: func(_ *astilectron.Astilectron, ws []*astilectron.Window, _ *astilectron.Menu, _ *astilectron.Tray, _ *astilectron.Menu) error {
 			w = ws[0]
 
+
+
 			w.OnMessage(func(m *astilectron.EventMessage) interface{} {
 
-				var message Message
 
-				m.Unmarshal(&message)
+				var msg Message
+				err := m.Unmarshal(&msg)
+				if err != nil {
+					fmt.Println(err)
+					return nil
+				}
+				fmt.Println(msg);
 
-				//log.Println(message.Author.Name + " says: " + message.Message)
+				switch msg.Type {
+					case 0:
+						fmt.Println("ChatMessage")
+						chatmsg := ChatMessage{}
+						json.Unmarshal([]byte(msg.Payload), &chatmsg)
+						fmt.Println(chatmsg.Message)
+				
+					case 1:
+						fmt.Println("ReadyMessage")
+						readymsg := ReadyMessage{}
+						json.Unmarshal([]byte(msg.Payload), &readymsg)
+						fmt.Println(readymsg)
+						w.Resize(850,650);
+						w.Center();
 
-				w.SendMessage(message, func(m *astilectron.EventMessage) {
-					// Unmarshal
-					var s string
-					m.Unmarshal(&s)
+					default:
+						fmt.Println("Unrecognized message :(")
+				}
 
-					// Process message
-					log.Printf("received %s\n", s)
-				})
+				w.SendMessage(msg);
 
-				return "hej"
+				return nil
 			})
 
 			// w.OpenDevTools()
@@ -104,13 +130,10 @@ func main() {
 				Height:    startHeight,
 				Width:     startWidth,
 				Resizable: astikit.BoolPtr(false),
-				MinHeight: startHeight,
-				MaxHeight: startHeight,
-				MinWidth:  startWidth,
-				MaxWidth:  startWidth,
 			},
 		}},
 	}); err != nil {
 		log.Fatal(fmt.Errorf("running bootstrap failed: %w", err))
 	}
 }
+

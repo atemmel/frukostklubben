@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatMessage } from '../chat-message/chat-message.component';
+import { ChatMessage, Message } from 'src/app/interfaces/message.interface'
 import { User } from '../user-section/user-section.component';
 
 import { UsersService } from '../../services/users.service';
@@ -55,17 +55,27 @@ export class ChatComponent implements OnInit {
   initListeners() {
     console.log('ready.......');
 
-    this.p2pService.onMessage((message: ChatMessage) => {
+    this.p2pService.sendReadyMessage()
+
+    this.p2pService.onMessage((message: Message) => {
       // Process message
-      console.log(message);
+      // console.log(message);
 
-      console.log(message.message);
-      console.log(message.author.name);
-
-      this.addMessage(message);
-
+      // console.log(message.payload.message);
+      // console.log(message.author.name);
+      if (this.isChatMessage(message.type, message.payload))
+      {
+       this.addMessage(JSON.parse(message.payload));
+      }
+  
       return 'hej';
     });
+  }
+
+  isChatMessage (type: number, payload : any) : payload is ChatMessage {
+
+    return type == 0;
+    
   }
 
   addMessage(message: ChatMessage) {
@@ -87,9 +97,12 @@ export class ChatComponent implements OnInit {
     console.log('skickar...');
 
     this.p2pService.sendChatMessage({
-      author: { name: 'Oscar' },
-      message: this.typedMessage,
-      timestamp: new Date().toLocaleString(),
+      type: 0,
+      payload: JSON.stringify({
+        author: { name: this.p2pService.user.name},
+        message: this.typedMessage,
+        timestamp: new Date().toLocaleString(),
+      })
     });
 
     this.typedMessage = '';

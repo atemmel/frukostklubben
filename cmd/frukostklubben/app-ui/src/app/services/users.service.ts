@@ -6,8 +6,8 @@ import { User } from '../components/user-section/user-section.component';
 })
 export class UsersService {
 
-  usersInChat: Array<User> = [{ name: 'Oscar', color: 'cyan' }, { name: 'Fredde', color: 'Yellow' } ,{ name: 'Isak', color: 'brown'  }, { name: 'Temmel', color: 'teal' }, { name: 'Mona', color: 'blue' } ];
-
+  private usersInChat: Array<User> = [{ name: 'Oscar', color: 'cyan' }, { name: 'Fredde', color: 'Yellow' } ,{ name: 'Isak', color: 'brown'  }, { name: 'Temmel', color: 'teal' }, { name: 'Mona', color: 'blue' } ];
+  loginUser: User;
   constructor() { }
 
   getUsers(): Array<User> {
@@ -26,5 +26,9 @@ export class UsersService {
       }
       this.usersInChat.splice(toRemoveIndex, 1);
     }
+  }
+
+  addUser(user: User) {
+    this.usersInChat.push(user);
   }
 }
