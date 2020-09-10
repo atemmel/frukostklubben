@@ -9,6 +9,7 @@ export enum MessageTypes {
   JOIN_MESSAGE = 1,
   LEAVE_MESSAGE = 2,
   READY_MESSAGE = 3,
+  LOGIN_MESSAGE = 4,
 }
 
 export interface Message {
@@ -31,6 +32,10 @@ export interface JoinMessage {
 }
 
 export interface LeaveMessage {
+  user: User;
+}
+
+export interface LoginMessage {
   user: User;
 }
 

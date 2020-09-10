@@ -1,7 +1,9 @@
 package main
 
 import (
-	// "encoding/json"
+	"encoding/json"
+	"io/ioutil"
+	"os"
 
 	astikit "github.com/asticode/go-astikit"
 	astilectron "github.com/asticode/go-astilectron"
@@ -35,10 +37,29 @@ type User struct {
 }
 
 type Message struct {
-	Message   string `json:"message"`
+	Type    int    `json:"type"`
+	Payload string `json:"payload"`
+}
+
+type ChatMessage struct {
 	Author    User   `json:"author"`
+	Message   string `json:"message"`
 	Timestamp string `json:"timestamp"`
 }
+
+type ReadyMessage struct {
+	ChatReady bool `json:"chatReady"`
+}
+
+type LoginMessage struct {
+	User User `json:"user"`
+}
+
+const userPath = "user.json"
+
+// type UserConfig struct {
+// 	Name string
+// }
 
 func main() {
 	// Create logger
@@ -47,8 +68,8 @@ func main() {
 	// Run bootstrap
 	log.Printf("Running app built at %s\n", BuiltAt)
 
-	var startHeight = astikit.IntPtr(600)
-	var startWidth = astikit.IntPtr(550)
+	var startHeight = astikit.IntPtr(450)
+	var startWidth = astikit.IntPtr(600)
 
 	if err := bootstrap.Run(bootstrap.Options{
 		Asset:    Asset,
@@ -69,22 +90,53 @@ func main() {
 
 			w.OnMessage(func(m *astilectron.EventMessage) interface{} {
 
-				var message Message
+				var msg Message
+				err := m.Unmarshal(&msg)
+				if err != nil {
+					fmt.Println(err)
+					return nil
+				}
+				fmt.Println(msg)
 
-				m.Unmarshal(&message)
+				switch msg.Type {
+				case 0:
+					fmt.Println("ChatMessage")
+					chatmsg := ChatMessage{}
+					json.Unmarshal([]byte(msg.Payload), &chatmsg)
+					fmt.Println(chatmsg.Message)
 
-				//log.Println(message.Author.Name + " says: " + message.Message)
+				case 1:
+					fmt.Println("ReadyMessage")
+					readymsg := ReadyMessage{}
+					json.Unmarshal([]byte(msg.Payload), &readymsg)
+					fmt.Println(readymsg)
+					w.Resize(850, 650)
+					w.Center()
+				case 4:
+					fmt.Println("LoginMessage")
+					usermsg := LoginMessage{}
+					json.Unmarshal([]byte(msg.Payload), &usermsg)
 
-				w.SendMessage(message, func(m *astilectron.EventMessage) {
-					// Unmarshal
-					var s string
-					m.Unmarshal(&s)
+					_, err := os.Create(userPath)
+					if err != nil {
+						log.Fatal(err)
+					}
 
-					// Process message
-					log.Printf("received %s\n", s)
-				})
+					file, _ := json.MarshalIndent(usermsg, "", " ")
+					// fmt.println(file)
+					fmt.Println(usermsg)
 
-				return "hej"
+					_ = ioutil.WriteFile(userPath, file, 0644)
+
+					// _, err2 := f.WriteString("old falcon\n")
+
+				default:
+					fmt.Println("Unrecognized message :(")
+				}
+
+				w.SendMessage(msg)
+
+				return nil
 			})
 
 			// w.OpenDevTools()
@@ -104,10 +156,6 @@ func main() {
 				Height:    startHeight,
 				Width:     startWidth,
 				Resizable: astikit.BoolPtr(false),
-				MinHeight: startHeight,
-				MaxHeight: startHeight,
-				MinWidth:  startWidth,
-				MaxWidth:  startWidth,
 			},
 		}},
 	}); err != nil {
