@@ -1,4 +1,4 @@
-module github.com/atemmel/go-electron
+module github.com/atemmel/frukostklubben
 
 go 1.15
 

@@ -5,7 +5,7 @@ import(
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"github.com/atemmel/go-electron/pkg/p2p"
+	"github.com/atemmel/frukostklubben/pkg/p2p"
 	"os"
 )
 
@@ -32,27 +32,12 @@ func main() {
 	fmt.Print("Enter your username: ")
 	input.Scan()
 	username := input.Text()
-	entry := p2p.NewPunchInMessage(username)
 
-	fmt.Println("Trying to punch...")
-	msg, err := p2p.SendMessageToBroker(entry, p2p.BrokerConnectionType, conf.BrokerAddress, p2p.BrokerPort)
+	peers := p2p.NewPeers(username)
+
+	err = peers.PunchIn(conf.BrokerAddress)
 	if err != nil {
 		panic(err)
-	}
-
-	if !msg.Connected {
-		fmt.Println("Could not connect to broker, username was already in use")
-		return
-	}
-
-	fmt.Println("Successfully recieved peers!")
-	for k, e := range msg.Peers {
-		fmt.Println("User", k, "is connected from", e)
-	}
-
-	peers := p2p.NewPeers()
-	for user, ip := range msg.Peers {
-		peers.AddConnection(user, p2p.PeerConnectionType, ip, p2p.PeerPort)
 	}
 
 	running := true
@@ -70,8 +55,7 @@ func main() {
 		}
 	}
 
-	exit := p2p.NewPunchOutMessage(username)
-	msg, err = p2p.SendMessageToBroker(exit, p2p.BrokerConnectionType, conf.BrokerAddress, p2p.BrokerPort)
+	err = peers.PunchOut(conf.BrokerAddress)
 	if err != nil {
 		panic(err)
 	}
