@@ -84,7 +84,7 @@ func (broker *Broker)handlePunchInRequest(conn net.Conn, msg *ToBrokerMessage) {
 
 	broker.ledgerMutex.Lock()
 	if punch.Username != "" && broker.ledger[punch.Username] == "" {
-		broker.ledger[punch.Username] = strings.Split(conn.RemoteAddr().String(), ":")[0])
+		broker.ledger[punch.Username] = strings.Split(conn.RemoteAddr().String(), ":")[0]
 	} else {
 		broker.cancelPunchRequest(conn)
 		return
