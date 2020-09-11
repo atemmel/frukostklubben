@@ -1,3 +1,14 @@
+.page-wrapper {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  min-width: 20rem;
+
+  flex-direction: column;
+}
+
 .playoff-wrapper {
   display: flex;
 
@@ -31,7 +42,7 @@
 
 .start-button {
   margin-top: 20px;
-  background-color: white;
+  // background-color: white;
 }
 
 .restaurant {
