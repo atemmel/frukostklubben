@@ -1,7 +1,7 @@
 package main
 
 import(
-	"github.com/atemmel/go-electron/pkg/p2p"
+	"github.com/atemmel/frukostklubben/pkg/p2p"
 	"net"
 	"log"
 )
